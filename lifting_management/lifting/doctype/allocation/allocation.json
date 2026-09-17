@@ -1,0 +1,190 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "DS.YYYY..MM.-.#####",
+ "creation": "2026-09-17 16:00:27.657833",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "posting_date",
+  "customer",
+  "column_break_obey",
+  "truckon",
+  "delivery_date",
+  "is_recieved",
+  "section_break_bghd",
+  "allocation_detail",
+  "section_break_lnpi",
+  "total_accepted_qty",
+  "total_accepted_tons",
+  "company",
+  "column_break_watr",
+  "total_rejected_qty",
+  "sales_invoice",
+  "status"
+ ],
+ "fields": [
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Customer",
+   "options": "Customer",
+   "reqd": 1
+  },
+  {
+   "fieldname": "delivery_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Delivery Date"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Draft\nRecieved\nRejected",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_bghd",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "allocation_detail",
+   "fieldtype": "Table",
+   "label": "Allocation Detail",
+   "options": "Allocation Detail",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_lnpi",
+   "fieldtype": "Section Break"
+  },
+  {
+   "bold": 1,
+   "fieldname": "total_accepted_qty",
+   "fieldtype": "Float",
+   "label": "Total QTY UOM",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_watr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "bold": 1,
+   "fieldname": "total_accepted_tons",
+   "fieldtype": "Float",
+   "hidden": 1,
+   "label": "Total Tons",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_obey",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "sales_invoice",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Sales Invoice",
+   "options": "Sales Invoice"
+  },
+  {
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "bold": 1,
+   "fieldname": "total_rejected_qty",
+   "fieldtype": "Float",
+   "label": "Total Rejected Qty",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "is_recieved",
+   "fieldtype": "Check",
+   "label": "Recieved"
+  },
+  {
+   "fieldname": "truckon",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Truckon",
+   "options": "Truckon"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-17 16:00:27.657833",
+ "modified_by": "Administrator",
+ "module": "Lifting",
+ "name": "Allocation",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Sales Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts User",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Sales User",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
