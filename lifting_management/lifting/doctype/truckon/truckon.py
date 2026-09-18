@@ -76,13 +76,18 @@ def create_trip(source_doc, target_doc=None):
 		else:
 			frappe.throw(_("Cannot allocate more quantity"))
 
+
+	""""postprocess": lambda source, target, source_parent: setattr(
+						target, "status", "Draft"
+					),"""
 	doclist = get_mapped_doc(
 		"Truckon",
 		source_doc,
 		{
 			"Truckon": {
 				"doctype": "Allocation", 
-				"validation": {"docstatus": ["=", 1]}
+				"validation": {"docstatus": ["=", 1]},
+				
 				},
 			"Truckon Detail": {
 				"doctype": "Allocation Detail",
