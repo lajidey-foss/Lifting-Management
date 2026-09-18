@@ -1,9 +1,99 @@
 # Copyright (c) 2026, Jide Olayinka [Pivotage Integrated] and contributors
 # For license information, please see license.txt
 
-# import frappe
+import frappe
 from frappe.model.document import Document
+from frappe import _
+from frappe.utils import flt
+from frappe.model.mapper import get_mapped_doc
 
 
 class Truckon(Document):
-	pass
+	def on_submit(self):
+		if not self.items:
+			frappe.throw(_("Add items before submitting"))
+		#self.status = "Scheduled"
+		self.db_set("status", "Scheduled")
+		self.reload()
+
+		self.create_purchase_invoice()
+		#pass
+	def on_cancel(self):
+		self.status = "Cancelled"
+		frappe.db.set_value(
+			self.doctype,
+			self.name,
+			"status",
+			"Cancelled",
+			update_modified=True
+		)
+	
+	def create_purchase_invoice(self):
+		"""
+		# TODO: Back link purchase to truckon
+		"""
+		ps_settings = frappe.get_doc('Pipeline Settings')
+
+		new_pi = frappe.new_doc("Purchase Invoice")
+		new_pi.supplier = ps_settings.default_supplier # or "LAFARGE"
+		new_pi.company = self.company or frappe.defaults.get_user_default("company")
+		new_pi.update_stock = True
+		new_pi.set_warehouse = ps_settings.lifting_warehouse
+
+		for row in self.get("items") :
+			new_pi.append("items", {
+				"item_code": row.item,
+				"qty": row.quantity,
+				"rate": row.rate
+			})
+		new_pi.insert()
+
+		frappe.msgprint(f"Purchase Invoice {new_pi.name} has been generated.")
+
+
+@frappe.whitelist()
+def create_trip(source_doc, target_doc=None):
+	""""
+	accepted_qty or quantity
+	"""
+	def update_item(source_doc, target_doc, source_parent):
+		def get_billed_qty(lt_item):
+			from frappe.query_builder.functions import Sum
+			
+			table = frappe.qb.DocType("Allocation Detail")
+			query = (
+				frappe.qb.from_(table)
+				.select(Sum(table.accepted_qty).as_("qty"))
+				.where( (table.to_detail == lt_item ) )
+			)
+			return query.run(pluck="quantity")[0] 
+
+		already_allocated = get_billed_qty(source_doc.name) or 0
+		pending_qty = flt(source_doc.quantity) - flt(already_allocated)
+		
+		if pending_qty > 0:
+			target_doc.accepted_qty = pending_qty
+		else:
+			frappe.throw(_("Cannot allocate more quantity"))
+
+	doclist = get_mapped_doc(
+		"Truckon",
+		source_doc,
+		{
+			"Truckon": {
+				"doctype": "Allocation", 
+				"validation": {"docstatus": ["=", 1]}
+				},
+			"Truckon Detail": {
+				"doctype": "Allocation Detail",
+				"field_map": {
+					"name": "to_detail",
+					"parent": "truckon",
+				},
+				"postprocess": update_item,
+			},
+		},
+		target_doc,
+	)
+
+	return doclist

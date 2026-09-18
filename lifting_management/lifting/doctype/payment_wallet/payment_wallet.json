@@ -17,7 +17,8 @@
   "total_tons",
   "pw_status",
   "reference_section",
-  "transfer_references"
+  "transfer_references",
+  "amended_from"
  ],
  "fields": [
   {
@@ -54,6 +55,7 @@
    "fieldtype": "Section Break"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "request_code",
    "fieldtype": "Data",
    "in_list_view": 1,
@@ -77,23 +79,36 @@
    "label": "Reference"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "transfer_references",
    "fieldtype": "Table",
    "label": "Transfer References",
    "options": "Transfer Entry Reference"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "sales_rc_order",
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Sales Order",
    "placeholder": "XSDDB0000000"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Payment Wallet",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2026-09-17 12:59:23.760612",
+ "modified": "2026-09-18 14:32:49.214282",
  "modified_by": "Administrator",
  "module": "Lifting",
  "name": "Payment Wallet",
