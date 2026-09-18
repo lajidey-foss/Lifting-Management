@@ -89,7 +89,6 @@
    "allow_on_submit": 1,
    "fieldname": "sales_rc_order",
    "fieldtype": "Data",
-   "in_list_view": 1,
    "label": "Sales Order",
    "placeholder": "XSDDB0000000"
   },
@@ -108,7 +107,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-09-18 14:32:49.214282",
+ "modified": "2026-09-18 20:00:39.106568",
  "modified_by": "Administrator",
  "module": "Lifting",
  "name": "Payment Wallet",

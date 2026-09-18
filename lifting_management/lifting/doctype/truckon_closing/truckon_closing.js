@@ -25,7 +25,7 @@ frappe.ui.form.on("Truckon Closing", {
 	},
     allocate_trip: function(frm) {
 		frappe.call({
-                    method: 'lifting_management.lifting.doctype.logon_closing.logon_closing.process_rejects',
+                    method: 'lifting_management.lifting.doctype.truckon_closing.truckon_closing.process_rejects',
                     args: {
                         self: frm.doc
                     },
