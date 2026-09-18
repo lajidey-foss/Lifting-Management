@@ -27,25 +27,25 @@ def update_logon_slip(self):
 def close_cycle(end, slip):
 	try:
 
-		slip_items = frappe.get_all("Truckon Detail", filters={"parent": slip}, fields=["name", "item", "qty"] )
+		slip_items = frappe.get_all("Truckon Detail", filters={"parent": slip}, fields=["name", "item", "quantity"] )
 
 		truckon_recon = []
 		for row in slip_items:
 			allotted_qty = frappe.db.sql(
 				"""SELECT SUM(accepted_qty) FROM `tabAllocation Detail`
-								WHERE lo_detail = %s""", row.name
+								WHERE to_detail = %s""", row.name
 			)[0][0] or 0
 			truckon_recon.append({
 				"item": row.item,
-				"logon_qty": row.qty,
+				"dispatch_qty": row.quantity,
 				"delivered_qty": allotted_qty,
-				"difference": flt(row.qty) - flt(allotted_qty)
+				"difference": flt(row.quantity) - flt(allotted_qty)
 			})
 		doc = frappe.get_doc({
 			'doctype': 'Truckon Closing',
-            'logon_close_date': end,
-            'logon': slip,
-			"logon_reconciliation": truckon_recon
+            'truckon_close_date': end,
+            'truckon': slip,
+			"truckon_reconciliation": truckon_recon
 		})
 		doc.insert()
 

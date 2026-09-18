@@ -34,7 +34,7 @@ frappe.listview_settings["Truckon Closing"] = {
 
                 // Call the server‐side method
                 frappe.call({
-                    method: 'lifting_management.lifting.doctype.logon_closing.logon_closing.close_cycle',
+                    method: 'lifting_management.lifting.doctype.truckon_closing.truckon_closing.close_cycle',
                     args: {
                         end: values.truckon_close_date,
                         slip: values.truckon
