@@ -42,7 +42,6 @@
   {
    "fieldname": "accept_in_tons",
    "fieldtype": "Float",
-   "hidden": 1,
    "label": "Accepted Tons"
   },
   {
@@ -60,12 +59,10 @@
    "label": "Truckon Detail",
    "print_hide": 1,
    "read_only": 1
-  }
-  ,
+  },
   {
    "fieldname": "rejected_in_tons",
    "fieldtype": "Float",
-   "hidden": 1,
    "label": "Rejected Tons"
   }
  ],
@@ -73,7 +70,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-09-17 16:01:18.217348",
+ "modified": "2026-09-24 18:24:16.391410",
  "modified_by": "Administrator",
  "module": "Lifting",
  "name": "Allocation Detail",

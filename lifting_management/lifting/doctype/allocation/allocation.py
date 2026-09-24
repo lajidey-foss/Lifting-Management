@@ -43,4 +43,4 @@ class Allocation(Document):
 
 	def get_default_income_account(self):
 		""" remove """
-		return frappe.get_cached_value("Company", frappe.defaults.get_user_default("company"), "default_income_account")
+		return frappe.get_cached_value("Company", self.company, "default_income_account")

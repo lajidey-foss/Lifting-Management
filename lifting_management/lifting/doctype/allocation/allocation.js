@@ -18,9 +18,9 @@ frappe.ui.form.on("Allocation", {
         frm.get_tons_qty_fig = function(frm) {
             let total_tons = 0.0;
             frm.doc.allocation_detail.forEach(elmt => {
-                total_tons += flt (elmt.qty_in_tons);
+                total_tons += flt(elmt.accept_in_tons);
             });
-            frm.set_value("total_qty_tons", total_tons);
+            frm.set_value("total_accepted_tons", total_tons);
         },
         frm.get_rejected_qty = function(frm) {
             let total_rejected_qty = 0;
@@ -49,14 +49,14 @@ frappe.ui.form.on("Allocation", {
 frappe.ui.form.on("Allocation Detail", {
     accepted_qty: function(frm, cdt, cdn) {
         frm.get_uom_qty_fig(frm);
-        frm.refresh_field(accepted_qty);
+        frm.refresh_field("accepted_qty");
     },
-    qty_in_tons: function (frm, cdt, cdn) {
+    accept_in_tons: function (frm, cdt, cdn) {
         frm.get_tons_qty_fig(frm);
-        frm.refresh_field(qty_in_tons);
+        frm.refresh_field("accept_in_tons");
     },
     rejected_qty: function (frm, cdt, cdn) {
         frm.get_rejected_qty(frm);
-        frm.refresh_field(rejected_qty)
+        frm.refresh_field("rejected_qty");
     }
 })

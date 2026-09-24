@@ -4,11 +4,11 @@
 frappe.ui.form.on("Payment Wallet", {
 	refresh(frm) {
         if(!frm.is_new()) {
-			frm.add_custom_button(__('Truckon'),
+			frm.add_custom_button(__('Create Dispatch'),
 				function() {
 					frm.trigger("make_truckons")
-				}, __('Create'));	
-			
+				}
+            ).addClass('btn-primary');
 		}
 
 	},
