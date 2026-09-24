@@ -2,22 +2,20 @@
 # For license information, please see license.txt
 
 import frappe
-from frappe.model.document import Document
 from frappe import _
-from frappe.utils import flt
+from frappe.model.document import Document
 from frappe.model.mapper import get_mapped_doc
+from frappe.utils import flt
 
 
 class Truckon(Document):
 	def on_submit(self):
 		if not self.items:
 			frappe.throw(_("Add items before submitting"))
-		#self.status = "Scheduled"
 		self.db_set("status", "Scheduled")
 		self.reload()
-
 		self.create_purchase_invoice()
-		#pass
+
 	def on_cancel(self):
 		self.status = "Cancelled"
 		frappe.db.set_value(
@@ -33,9 +31,15 @@ class Truckon(Document):
 		# TODO: Back link purchase to truckon
 		"""
 		ps_settings = frappe.get_doc('Pipeline Settings')
+		if not ps_settings.default_supplier:
+			frappe.throw(_("Set a Default Supplier in Pipeline Settings before submitting"))
+		if not ps_settings.lifting_warehouse:
+			frappe.throw(_("Set a Lifting Warehouse in Pipeline Settings before submitting"))
+		if not self.company and not frappe.defaults.get_user_default("company"):
+			frappe.throw(_("Set a Company on the Truckon before submitting"))
 
 		new_pi = frappe.new_doc("Purchase Invoice")
-		new_pi.supplier = ps_settings.default_supplier # or "LAFARGE"
+		new_pi.supplier = ps_settings.default_supplier
 		new_pi.company = self.company or frappe.defaults.get_user_default("company")
 		new_pi.update_stock = True
 		new_pi.set_warehouse = ps_settings.lifting_warehouse
@@ -64,9 +68,9 @@ def create_trip(source_doc, target_doc=None):
 			query = (
 				frappe.qb.from_(table)
 				.select(Sum(table.accepted_qty).as_("qty"))
-				.where( (table.to_detail == lt_item ) )
+				.where(table.to_detail == lt_item)
 			)
-			return query.run(pluck="quantity")[0] 
+			return (query.run(pluck="qty") or [0])[0]
 
 		already_allocated = get_billed_qty(source_doc.name) or 0
 		pending_qty = flt(source_doc.quantity) - flt(already_allocated)
@@ -76,10 +80,6 @@ def create_trip(source_doc, target_doc=None):
 		else:
 			frappe.throw(_("Cannot allocate more quantity"))
 
-
-	""""postprocess": lambda source, target, source_parent: setattr(
-						target, "status", "Draft"
-					),"""
 	doclist = get_mapped_doc(
 		"Truckon",
 		source_doc,

@@ -9,11 +9,13 @@
   "dispatch_id",
   "dispatch_date",
   "trunckon_close_date",
-  "location_from",
   "column_break_gsdd",
   "payment_wallet",
   "request_order",
   "lifting_warehouse",
+  "column_break_oiyc",
+  "plan_order_code",
+  "location_from",
   "section_break_lwzb",
   "items",
   "section_break_arci",
@@ -177,13 +179,26 @@
    "print_hide": 1,
    "read_only": 1,
    "search_index": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "description": "Sales Order from the Sale Manager Planning",
+   "fieldname": "plan_order_code",
+   "fieldtype": "Data",
+   "in_standard_filter": 1,
+   "label": "Sales Order (Plan Code)",
+   "placeholder": "XSDDB0000000"
+  },
+  {
+   "fieldname": "column_break_oiyc",
+   "fieldtype": "Column Break"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-09-18 19:44:30.381484",
+ "modified": "2026-09-23 17:30:18.340889",
  "modified_by": "Administrator",
  "module": "Lifting",
  "name": "Truckon",
@@ -191,6 +206,7 @@
  "owner": "Administrator",
  "permissions": [
   {
+   "cancel": 1,
    "create": 1,
    "delete": 1,
    "email": 1,
@@ -200,9 +216,11 @@
    "report": 1,
    "role": "System Manager",
    "share": 1,
+   "submit": 1,
    "write": 1
   },
   {
+   "cancel": 1,
    "create": 1,
    "delete": 1,
    "email": 1,
@@ -212,9 +230,11 @@
    "report": 1,
    "role": "Accounts User",
    "share": 1,
+   "submit": 1,
    "write": 1
   },
   {
+   "cancel": 1,
    "create": 1,
    "delete": 1,
    "email": 1,
@@ -224,9 +244,11 @@
    "report": 1,
    "role": "Sales User",
    "share": 1,
+   "submit": 1,
    "write": 1
   },
   {
+   "cancel": 1,
    "create": 1,
    "delete": 1,
    "email": 1,
@@ -236,9 +258,11 @@
    "report": 1,
    "role": "Purchase User",
    "share": 1,
+   "submit": 1,
    "write": 1
   },
   {
+   "cancel": 1,
    "create": 1,
    "delete": 1,
    "email": 1,
@@ -248,6 +272,7 @@
    "report": 1,
    "role": "Stock Manager",
    "share": 1,
+   "submit": 1,
    "write": 1
   }
  ],
