@@ -83,12 +83,13 @@ app_license = "mit"
 # ------------
 
 # before_install = "lifting_management.install.before_install"
-# after_install = "lifting_management.install.after_install"
+after_install = "lifting_management.tasks.after_install"
+after_migrate = "lifting_management.tasks.after_migrate"
 
 # Uninstallation
 # ------------
 
-# before_uninstall = "lifting_management.uninstall.before_uninstall"
+before_uninstall = "lifting_management.tasks.before_uninstall"
 # after_uninstall = "lifting_management.uninstall.after_uninstall"
 
 # Integration Setup
