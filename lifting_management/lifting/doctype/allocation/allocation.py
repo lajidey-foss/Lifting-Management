@@ -8,7 +8,7 @@ from frappe.model.document import Document
 class Allocation(Document):
 	def on_update(self):
 		
-		if self.status == "Recieved" :
+		if self.status == "Recieved" and not self.sales_doc :
 			self.create_sales_invoice()
 	
 	def create_sales_invoice(self):
@@ -25,6 +25,8 @@ class Allocation(Document):
 		new_si.update_stock = True
 		new_si.custom_trip = self.name
 		new_si.set_warehouse = ps_settings.lifting_warehouse
+		new_si.lm_allocation = self.name
+		new_si.lm_truckon = self.truckon
 
 		for row in self.get("allocation_detail"):
 			new_si.append("items", {
@@ -38,6 +40,7 @@ class Allocation(Document):
 		# Update the current Trip Allocation record to link the new invoice
         # This requires a 'sales_invoice' link field in your Trip Allocation doctype
 		#self.db_set("sales_invoice", new_si.name)
+		self.db_set("sales_doc", new_si.name)
 
 		frappe.msgprint(f"Sales Invoice {new_si.name} has been generated.")
 

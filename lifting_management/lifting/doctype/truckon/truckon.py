@@ -43,6 +43,7 @@ class Truckon(Document):
 		new_pi.company = self.company or frappe.defaults.get_user_default("company")
 		new_pi.update_stock = True
 		new_pi.set_warehouse = ps_settings.lifting_warehouse
+		new_pi.lm_truckon = self.name
 
 		for row in self.get("items") :
 			new_pi.append("items", {
@@ -51,6 +52,8 @@ class Truckon(Document):
 				"rate": row.rate
 			})
 		new_pi.insert()
+
+		self.db_set("purchase_doc", new_pi.name)
 
 		frappe.msgprint(f"Purchase Invoice {new_pi.name} has been generated.")
 
