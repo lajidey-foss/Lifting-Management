@@ -16,6 +16,7 @@
   "lifting_warehouse",
   "column_break_oiyc",
   "plan_order_code",
+  "dispatch_type",
   "location_from",
   "section_break_lwzb",
   "items",
@@ -45,6 +46,14 @@
    "fieldname": "dispatch_date",
    "fieldtype": "Date",
    "label": "Dispatch Date"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "dispatch_type",
+   "fieldtype": "Select",
+   "in_standard_filter": 1,
+   "label": "Dispatch Type",
+   "options": "\nDDP\nEXW"
   },
   {
    "allow_on_submit": 1,
@@ -205,8 +214,8 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-09-27 16:31:25.255570",
- "modified_by": "glodmin@pivotage.io",
+ "modified": "2026-11-19 13:09:12.884803",
+ "modified_by": "Administrator",
  "module": "Lifting",
  "name": "Truckon",
  "naming_rule": "By fieldname",

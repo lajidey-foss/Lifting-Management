@@ -405,10 +405,20 @@
    "hidden": 0,
    "is_query_report": 0,
    "label": "Dispatch",
-   "link_count": 4,
+   "link_count": 5,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Dispatch Report",
+   "link_count": 0,
+   "link_to": "Item Dispatch",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
   },
   {
    "dependencies": "Item",
@@ -455,7 +465,7 @@
    "type": "Link"
   }
  ],
- "modified": "2026-09-24 18:51:11.374548",
+ "modified": "2026-11-19 13:43:48.055488",
  "modified_by": "Administrator",
  "module": "Lifting",
  "name": "HBM",
@@ -482,6 +492,15 @@
  "sequence_id": 2.0,
  "shortcuts": [
   {
+   "color": "Blue",
+   "doc_view": "",
+   "format": "{}  Recieved",
+   "label": "Allocation",
+   "link_to": "Allocation",
+   "stats_filter": "[[\"Allocation\",\"status\",\"=\",\"Recieved\",false]]",
+   "type": "DocType"
+  },
+  {
    "color": "Orange",
    "doc_view": "List",
    "format": "{}  Scheduled",
@@ -497,15 +516,6 @@
    "label": "Payment Wallet",
    "link_to": "Payment Wallet",
    "stats_filter": "[[\"Payment Wallet\",\"pw_status\",\"=\",\"In Progress\",false]]",
-   "type": "DocType"
-  },
-  {
-   "color": "Blue",
-   "doc_view": "",
-   "format": "{}  Pending",
-   "label": "Allocation",
-   "link_to": "Allocation",
-   "stats_filter": "[[\"Allocation\",\"status\",\"=\",\"Draft\",false]]",
    "type": "DocType"
   },
   {
